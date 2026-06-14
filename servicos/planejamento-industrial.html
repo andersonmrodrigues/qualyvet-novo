@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planejamento Industrial | Qualyvet Consultoria</title>
+  <meta name="description" content="Projetos de construção, reforma e ampliação para adequação às normas do MAPA.">
+  <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&family=Roboto+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* Blueprint Viewer Signature Element */
+    .blueprint-viewer {
+      background: linear-gradient(135deg, #0a1f12 0%, #1a3d1f 100%);
+      border-radius: 20px;
+      padding: 48px;
+      margin: 60px 0;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(153, 181, 51, 0.2);
+    }
+    .blueprint-viewer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(153,181,51,0.03) 19px, rgba(153,181,51,0.03) 20px),
+        repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(153,181,51,0.03) 19px, rgba(153,181,51,0.03) 20px);
+      pointer-events: none;
+    }
+    .blueprint-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .blueprint-title {
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .blueprint-title::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse-glow 2s infinite;
+    }
+    .blueprint-id {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: rgba(153, 181, 51, 0.6);
+      letter-spacing: 1px;
+    }
+    .blueprint-zones {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .zone-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(153, 181, 51, 0.2);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .zone-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .zone-number {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: var(--color-accent);
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .zone-name {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .zone-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+    }
+    .spec-label {
+      color: rgba(255, 255, 255, 0.5);
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .spec-value {
+      color: #fff;
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .zone-arrow {
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: rgba(153, 181, 51, 0.4);
+      font-size: 16px;
+      z-index: 2;
+    }
+    .zone-card:last-child .zone-arrow {
+      display: none;
+    }
+    .blueprint-flow {
+      margin-top: 32px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(153, 181, 51, 0.15);
+      position: relative;
+      z-index: 1;
+    }
+    .flow-label {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+    .flow-path {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .flow-step {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 6px 12px;
+      background: rgba(153, 181, 51, 0.1);
+      border-radius: 6px;
+      border: 1px solid rgba(153, 181, 51, 0.2);
+    }
+    .flow-arrow {
+      color: var(--color-accent);
+      font-size: 12px;
+    }
+
+    /* Technical Specs Grid */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin: 48px 0;
+    }
+    .spec-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1.5px solid var(--color-border);
+      transition: all 0.3s ease;
+    }
+    .spec-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 8px 24px rgba(47, 101, 53, 0.1);
+      transform: translateY(-2px);
+    }
+    .spec-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    .spec-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-primary-dark);
+      margin-bottom: 8px;
+    }
+    .spec-value-large {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--color-primary);
+      margin-bottom: 4px;
+    }
+    .spec-unit {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Technical Table */
+    .tech-table-wrapper {
+      background: var(--color-surface);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 48px 0;
+    }
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 13px;
+    }
+    .tech-table thead {
+      background: var(--color-primary-dark);
+      color: #fff;
+    }
+    .tech-table th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+    .tech-table th:first-child {
+      border-radius: 8px 0 0 0;
+    }
+    .tech-table th:last-child {
+      border-radius: 0 8px 0 0;
+    }
+    .tech-table td {
+      padding: 16px;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text);
+    }
+    .tech-table tbody tr:hover {
+      background: rgba(47, 101, 53, 0.03);
+    }
+    .tech-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .norm-code {
+      display: inline-block;
+      padding: 4px 8px;
+      background: #e8f4e8;
+      border-radius: 4px;
+      color: var(--color-primary);
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    /* Timeline */
+    .timeline-section {
+      margin: 60px 0;
+    }
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 5%;
+      right: 5%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-accent) 100%);
+      z-index: 0;
+    }
+    .timeline-phase {
+      position: relative;
+      z-index: 1;
+      padding: 0 16px;
+    }
+    .timeline-marker {
+      width: 48px;
+      height: 48px;
+      background: #fff;
+      border: 4px solid var(--color-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-weight: 700;
+      color: var(--color-primary);
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(47, 101, 53, 0.2);
+    }
+    .timeline-content h4 {
+      font-size: 15px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .timeline-duration {
+      display: block;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      color: var(--color-primary);
+      font-weight: 600;
+      text-align: center;
+      margin-top: 6px;
+    }
+    .timeline-desc {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      text-align: center;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .blueprint-zones {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .zone-arrow {
+        display: none;
+      }
+      .specs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .timeline {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+      .timeline::before {
+        display: none;
+      }
+    }
+    @media (max-width: 640px) {
+      .blueprint-viewer {
+        padding: 28px 20px;
+      }
+      .blueprint-zones {
+        grid-template-columns: 1fr;
+      }
+      .specs-grid {
+        grid-template-columns: 1fr;
+      }
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+      .tech-table-wrapper {
+        padding: 20px;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">
+      <img src="../assets/images/qualyvet.png" alt="Qualyvet Consultoria">
+    </a>
+    <nav class="main-nav">
+      <a href="../index.html">Início</a>
+      <a href="../sobre.html">Quem Somos</a>
+      <a href="gestao-de-qualidade.html" class="active">Serviços</a>
+      <a href="../artigos/index.html">Artigos</a>
+      <a href="../contato.html">Contato</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank" rel="noopener" class="btn-platform">🔐 Plataforma</a>
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Início</a> / <a href="gestao-de-qualidade.html">Serviços</a> / <span>Planejamento Industrial</span>
+    </div>
+    <h1>Planejamento Industrial</h1>
+    <p>Projetos técnicos de layout, construção e adequação para estabelecimentos agroindustriais sob inspeção MAPA.</p>
+  </div>
+</div>
+
+<!-- Signature Element: Blueprint Viewer -->
+<section style="padding: 60px 0;">
+  <div class="container">
+    <span class="section-label">Visualização de Layout</span>
+    <h2 style="margin-bottom: 12px;">Zonas Funcionais do Estabelecimento</h2>
+    <p style="margin-bottom: 32px; max-width: 720px;">Projetar layout agroindustrial exige análise técnica de fluxos, dimensionamento conforme capacidade produtiva e conformidade com normas MAPA para cada zona funcional.</p>
+    
+    <div class="blueprint-viewer">
+      <div class="blueprint-header">
+        <div class="blueprint-title">
+          Layout — Estabelecimento Agroindustrial
+        </div>
+        <div class="blueprint-id">PROJ-2026-MAPA</div>
+      </div>
+      
+      <div class="blueprint-zones">
+        <div class="zone-card">
+          <div class="zone-number">ZONA 01</div>
+          <div class="zone-name">Recepção de Matéria-Prima</div>
+          <div class="zone-specs">
+            <div class="spec-row">
+              <span class="spec-label">Área</span>
+              <span class="spec-value">45-80 m²</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Temp.</span>
+              <span class="spec-value">≤ 12°C</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Equip.</span>
+              <span class="spec-value">4-6 un</span>
+            </div>
+          </div>
+          <div class="zone-arrow">→</div>
+        </div>
+
+        <div class="zone-card">
+          <div class="zone-number">ZONA 02</div>
+          <div class="zone-name">Produção e Processamento</div>
+          <div class="zone-specs">
+            <div class="spec-row">
+              <span class="spec-label">Área</span>
+              <span class="spec-value">120-250 m²</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Temp.</span>
+              <span class="spec-value">8-15°C</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Equip.</span>
+              <span class="spec-value">12-20 un</span>
+            </div>
+          </div>
+          <div class="zone-arrow">→</div>
+        </div>
+
+        <div class="zone-card">
+          <div class="zone-number">ZONA 03</div>
+          <div class="zone-name">Expedição e Câmaras</div>
+          <div class="zone-specs">
+            <div class="spec-row">
+              <span class="spec-label">Área</span>
+              <span class="spec-value">60-110 m²</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Temp.</span>
+              <span class="spec-value">-2 a 4°C</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Equip.</span>
+              <span class="spec-value">6-8 un</span>
+            </div>
+          </div>
+          <div class="zone-arrow">→</div>
+        </div>
+
+        <div class="zone-card">
+          <div class="zone-number">ZONA 04</div>
+          <div class="zone-name">Áreas de Apoio</div>
+          <div class="zone-specs">
+            <div class="spec-row">
+              <span class="spec-label">Área</span>
+              <span class="spec-value">80-140 m²</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Compart.</span>
+              <span class="spec-value">8-12 un</span>
+            </div>
+            <div class="spec-row">
+              <span class="spec-label">Vestiários</span>
+              <span class="spec-value">2-4 un</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="blueprint-flow">
+        <div class="flow-label">Fluxo Operacional Obrigatório</div>
+        <div class="flow-path">
+          <span class="flow-step">Desembarque</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Inspeção Ante-Mortem</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Abate / Processamento</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Inspeção Post-Mortem</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Resfriamento</span>
+          <span class="flow-arrow">→</span>
+          <span class="flow-step">Expedição</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Technical Specifications -->
+<section class="surface" style="padding: 60px 0;">
+  <div class="container">
+    <span class="section-label">Especificações Técnicas</span>
+    <h2 style="margin-bottom: 40px;">Requisitos Normativos e Dimensionamento</h2>
+    
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-icon">📐</div>
+        <div class="spec-title">Área Mínima Total</div>
+        <div class="spec-value-large">305</div>
+        <div class="spec-unit">metros quadrados (base)</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">🌡️</div>
+        <div class="spec-title">Controle Térmico</div>
+        <div class="spec-value-large">4</div>
+        <div class="spec-unit">zonas climatizadas</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-icon">⚙️</div>
+        <div class="spec-title">Equipamentos</div>
+        <div class="spec-value-large">22-34</div>
+        <div class="spec-unit">unidades (média)</div>
+      </div>
+    </div>
+
+    <div class="tech-table-wrapper">
+      <table class="tech-table">
+        <thead>
+          <tr>
+            <th>Área / Compartimento</th>
+            <th>Requisito Normativo</th>
+            <th>Norma Aplicável</th>
+            <th>Dimensão Típica</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sala de Abate</td>
+            <td>Pé-direito mínimo 4m, impermeabilização total</td>
+            <td><span class="norm-code">RIISPOA Art. 62</span></td>
+            <td>80-150 m²</td>
+          </tr>
+          <tr>
+            <td>Câmara Fria (resfriamento)</td>
+            <td>Temperatura 0°C a 4°C, isolamento térmico</td>
+            <td><span class="norm-code">Portaria 368/97</span></td>
+            <td>40-70 m²</td>
+          </tr>
+          <tr>
+            <td>Vestiários / Sanitários</td>
+            <td>Separação por sexo, acesso indireto</td>
+            <td><span class="norm-code">RIISPOA Art. 54</span></td>
+            <td>30-50 m²</td>
+          </tr>
+          <tr>
+            <td>Barreira Sanitária</td>
+            <td>Lava-botas, lavatórios, sanitizantes</td>
+            <td><span class="norm-code">IN 15/2016</span></td>
+            <td>8-12 m²</td>
+          </tr>
+          <tr>
+            <td>Sala de Inspeção (SIF)</td>
+            <td>Exclusiva para inspetor federal</td>
+            <td><span class="norm-code">RIISPOA Art. 59</span></td>
+            <td>9-12 m²</td>
+          </tr>
+          <tr>
+            <td>Depósito de Resíduos</td>
+            <td>Isolado, acesso externo, refrigerado</td>
+            <td><span class="norm-code">Portaria 711/95</span></td>
+            <td>15-25 m²</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- Project Timeline -->
+<section style="padding: 60px 0;">
+  <div class="container">
+    <span class="section-label">Cronograma de Projeto</span>
+    <h2 style="margin-bottom: 12px;">Fases do Planejamento Industrial</h2>
+    <p style="margin-bottom: 48px; max-width: 720px;">Desenvolvimento completo desde diagnóstico inicial até acompanhamento da execução física.</p>
+    
+    <div class="timeline-section">
+      <div class="timeline">
+        <div class="timeline-phase">
+          <div class="timeline-marker">1</div>
+          <div class="timeline-content">
+            <h4>Diagnóstico e Levantamento</h4>
+            <span class="timeline-duration">2-3 semanas</span>
+            <p class="timeline-desc">Visita técnica, medições, análise de capacidade produtiva, identificação de não-conformidades.</p>
+          </div>
+        </div>
+        <div class="timeline-phase">
+          <div class="timeline-marker">2</div>
+          <div class="timeline-content">
+            <h4>Projeto Técnico</h4>
+            <span class="timeline-duration">4-6 semanas</span>
+            <p class="timeline-desc">Elaboração de plantas, memorial descritivo, especificações técnicas, cálculos de carga.</p>
+          </div>
+        </div>
+        <div class="timeline-phase">
+          <div class="timeline-marker">3</div>
+          <div class="timeline-content">
+            <h4>Aprovação MAPA</h4>
+            <span class="timeline-duration">6-12 semanas</span>
+            <p class="timeline-desc">Submissão ao órgão fiscalizador, ajustes solicitados, obtenção de aprovação do projeto.</p>
+          </div>
+        </div>
+        <div class="timeline-phase">
+          <div class="timeline-marker">4</div>
+          <div class="timeline-content">
+            <h4>Acompanhamento de Obra</h4>
+            <span class="timeline-duration">Conforme escopo</span>
+            <p class="timeline-desc">Vistorias periódicas, validação de conformidade, ajustes de execução, preparação para inspeção.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Deliverables -->
+<section class="surface" style="padding: 60px 0;">
+  <div class="container">
+    <div class="grid-asymmetric">
+      <div>
+        <span class="section-label">Entregáveis do Projeto</span>
+        <h2 style="margin-bottom: 20px;">Documentação Técnica Completa</h2>
+        <p style="margin-bottom: 28px;">Conjunto completo de documentos necessários para aprovação junto ao MAPA e execução da obra conforme normas técnicas.</p>
+        
+        <div style="display: grid; gap: 16px;">
+          <div class="card-modern" style="padding: 24px;">
+            <h4 style="font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+              <span style="color: var(--color-accent);">📄</span> Plantas Baixas e Cortes
+            </h4>
+            <p style="font-size: 13px; color: var(--color-text-muted); margin: 0;">Layout completo com dimensionamento de todas as áreas, escala 1:50 ou 1:100, formato DWG e PDF.</p>
+          </div>
+          
+          <div class="card-modern" style="padding: 24px;">
+            <h4 style="font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+              <span style="color: var(--color-accent);">📋</span> Memorial Descritivo
+            </h4>
+            <p style="font-size: 13px; color: var(--color-text-muted); margin: 0;">Especificações de materiais, revestimentos, equipamentos, instalações elétricas e hidráulicas.</p>
+          </div>
+          
+          <div class="card-modern" style="padding: 24px;">
+            <h4 style="font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+              <span style="color: var(--color-accent);">🔄</span> Fluxogramas Operacionais
+            </h4>
+            <p style="font-size: 13px; color: var(--color-text-muted); margin: 0;">Diagramas de fluxo de produto, pessoas, resíduos e utensílios conforme exigências MAPA.</p>
+          </div>
+          
+          <div class="card-modern" style="padding: 24px;">
+            <h4 style="font-size: 15px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px;">
+              <span style="color: var(--color-accent);">📐</span> Planilha de Dimensionamento
+            </h4>
+            <p style="font-size: 13px; color: var(--color-text-muted); margin: 0;">Cálculo de capacidade produtiva, número de operadores, equipamentos necessários por zona.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <div class="card-modern hover-lift" style="background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%); color: #fff; padding: 40px;">
+          <h3 style="color: #fff; margin-bottom: 16px; font-size: 20px;">Estabelecimentos Atendidos</h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px;">
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px;">
+              <span style="width: 32px; height: 32px; background: rgba(153, 181, 51, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🐄</span>
+              <span>Frigoríficos e Abatedouros</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px;">
+              <span style="width: 32px; height: 32px; background: rgba(153, 181, 51, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🧀</span>
+              <span>Laticínios e Queijarias</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px;">
+              <span style="width: 32px; height: 32px; background: rgba(153, 181, 51, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🐟</span>
+              <span>Beneficiadoras de Pescado</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px;">
+              <span style="width: 32px; height: 32px; background: rgba(153, 181, 51, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🥚</span>
+              <span>Produtoras de Ovos</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px;">
+              <span style="width: 32px; height: 32px; background: rgba(153, 181, 51, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🍯</span>
+              <span>Entrepostos de Mel</span>
+            </li>
+            <li style="display: flex; align-items: center; gap: 12px; font-size: 14px;">
+              <span style="width: 32px; height: 32px; background: rgba(153, 181, 51, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px;">🥓</span>
+              <span>Charqueadas e Defumadoras</span>
+            </li>
+          </ul>
+          
+          <div style="margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.15);">
+            <p style="font-size: 13px; color: rgba(255,255,255,0.8); margin: 0;">Projetos sob inspeção <strong style="color: var(--color-accent);">SIF</strong>, <strong style="color: var(--color-accent);">SISBI-POA</strong> e <strong style="color: var(--color-accent);">SIE</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visual Section -->
+<section style="padding:60px 0;background:#f4f7f4;">
+  <div class="container">
+    <div style="max-width:900px;margin:0 auto;">
+      <img src="../assets/images/new-images/industrial-blueprint.jpg" alt="Planta industrial" style="width:100%;border-radius:20px;box-shadow:0 8px 32px rgba(47,101,53,0.12);">
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <span class="section-label">Fale conosco</span>
+    <h2>Pronto para iniciar seu projeto industrial?</h2>
+    <p>Entre em contato para diagnóstico inicial e orçamento sem compromisso.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> Falar pelo WhatsApp
+      </a>
+      <a href="../contato.html" class="btn btn-ghost">Enviar mensagem</a>
+    </div>
+  </div>
+</section>
+
+<section class="related-services surface">
+  <div class="container">
+    <span class="section-label">Serviços Relacionados</span>
+    <h2 style="margin-bottom:32px;">Soluções Complementares</h2>
+    <div class="related-grid">
+      <div class="service-card">
+        <div class="service-icon">🏭</div>
+        <h3>Gestão de Qualidade</h3>
+        <p>Programas de autocontrole e adequação normativa para estabelecimentos sob inspeção.</p>
+        <a href="gestao-de-qualidade.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>Acompanhamento de Processos</h3>
+        <p>Gestão de pedidos de registro SIF, SISBI-POA e alterações cadastrais junto ao MAPA.</p>
+        <a href="acompanhamento-de-processos.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card lime">
+        <div class="service-icon">💻</div>
+        <h3>Sistema QualySys</h3>
+        <p>Plataforma de gestão documental na nuvem com controle de versões e assinaturas digitais.</p>
+        <a href="sistemas-informatizados.html" class="service-link">Conhecer →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-info">
+        <div class="footer-brand">Qualyvet<span>.</span></div>
+        <p>R. Ver. Ivo Cláudio Weigel, 228<br>Renascença — Santa Cruz do Sul / RS</p>
+        <p>(51) 3121-3066</p>
+        <p>contato@qualyvetconsultoria.com.br</p>
+        <p style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.4);">CNPJ 24.184.899/0001-08</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Serviços</div>
+        <a href="gestao-de-qualidade.html">Gestão de Qualidade</a>
+        <a href="planejamento-industrial.html">Planejamento Industrial</a>
+        <a href="treinamento-e-capacitacao.html">Treinamento</a>
+        <a href="assessoria-e-consultoria.html">Assessoria e Consultoria</a>
+        <a href="acompanhamento-de-processos.html">Acompanhamento</a>
+        <a href="sistemas-informatizados.html">Sistema QualySys</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Artigos</div>
+        <a href="../artigos/o-que-e-sif.html">O que é o SIF?</a>
+        <a href="../artigos/sisbi-poa-vs-sif.html">SISBI-POA vs SIF</a>
+        <a href="../artigos/programas-de-autocontrole.html">Programas de Autocontrole</a>
+        <a href="../artigos/como-obter-registro-mapa.html">Como obter registro MAPA</a>
+        <a href="../artigos/haccp-o-que-e.html">O que é HACCP?</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Links</div>
+        <a href="../index.html">Início</a>
+        <a href="../sobre.html">Quem Somos</a>
+        <a href="../trabalhe-conosco.html">Trabalhe Conosco</a>
+        <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank">Plataforma QualySys</a>
+        <a href="../contato.html">Contato</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Qualyvet Consultoria e Assessoria LTDA. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

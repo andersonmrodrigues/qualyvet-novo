@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Acompanhamento de Processos | Qualyvet Consultoria</title>
+  <meta name="description" content="Monitoramento contínuo com KPIs em tempo real. Registros auditáveis e preparação para fiscalização MAPA.">
+  <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* Signature element: Process Monitoring Dashboard */
+    .monitoring-dashboard {
+      background: linear-gradient(135deg, #1a3d1f 0%, #2f6535 100%);
+      border-radius: 24px;
+      padding: 48px;
+      margin: 48px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .monitoring-dashboard::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(153,181,51,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .dashboard-header {
+      color: #fff;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .dashboard-header h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .dashboard-header .status-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #99b533;
+      font-weight: 700;
+    }
+    .dashboard-header .status-live::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #99b533;
+      border-radius: 50%;
+      animation: pulse-glow 2s infinite;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+    .kpi-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    .kpi-card:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+    .kpi-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .kpi-value {
+      font-family: 'Roboto Slab', serif;
+      font-size: 42px;
+      font-weight: 900;
+      color: #99b533;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .kpi-unit {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+    .kpi-trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #99b533;
+      margin-top: 8px;
+    }
+    .kpi-trend.down {
+      color: #ff6b6b;
+    }
+    
+    /* Monitoring checklist: intentional structure */
+    .monitoring-points {
+      margin: 48px 0;
+    }
+    .point-item {
+      background: #fff;
+      border-left: 4px solid #e0e8e0;
+      padding: 20px 24px;
+      margin-bottom: 2px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      transition: all 0.2s ease;
+    }
+    .point-item:hover {
+      border-left-color: #2f6535;
+      background: #f9faf9;
+      transform: translateX(4px);
+    }
+    .point-frequency {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: #2f6535;
+      font-weight: 700;
+      min-width: 80px;
+      padding: 4px 8px;
+      background: #f0f7f0;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .point-content h4 {
+      font-size: 15px;
+      margin-bottom: 4px;
+      color: #1a3d1f;
+    }
+    .point-content p {
+      font-size: 13px;
+      color: #666;
+      margin: 0;
+    }
+    
+    /* Visit calendar: showing real frequency */
+    .visit-calendar {
+      background: #f4f7f4;
+      border-radius: 16px;
+      padding: 32px;
+      margin: 32px 0;
+    }
+    .calendar-header {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #2f6535;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+    .calendar-months {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 8px;
+    }
+    .month-block {
+      aspect-ratio: 1;
+      background: #fff;
+      border: 2px solid #e0e8e0;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: #666;
+      position: relative;
+    }
+    .month-block.active {
+      background: #2f6535;
+      border-color: #2f6535;
+      color: #fff;
+    }
+    .month-block .visits-count {
+      font-size: 18px;
+      font-weight: 900;
+      margin-top: 2px;
+    }
+    
+    @media (max-width: 1024px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .calendar-months {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .monitoring-dashboard {
+        padding: 32px 24px;
+      }
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+      .kpi-value {
+        font-size: 36px;
+      }
+      .calendar-months {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .point-item {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">
+      <img src="../assets/images/qualyvet.png" alt="Qualyvet Consultoria">
+    </a>
+    <nav class="main-nav">
+      <a href="../index.html">Início</a>
+      <a href="../sobre.html">Quem Somos</a>
+      <a href="gestao-de-qualidade.html" class="active">Serviços</a>
+      <a href="../artigos/index.html">Artigos</a>
+      <a href="../contato.html">Contato</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank" rel="noopener" class="btn-platform">🔐 Plataforma</a>
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Início</a> / <a href="gestao-de-qualidade.html">Serviços</a> / <span>Acompanhamento de Processos</span>
+    </div>
+    <h1>Acompanhamento de Processos</h1>
+    <p style="max-width:640px;">Monitoramento contínuo com KPIs em tempo real. Registros auditáveis e preparação para fiscalização MAPA.</p>
+  </div>
+</div>
+
+<section class="service-detail">
+  <div class="container">
+    
+    <!-- SIGNATURE ELEMENT: Process Monitoring Dashboard -->
+    <div class="monitoring-dashboard">
+      <div class="dashboard-header">
+        <h3>Dashboard de monitoramento</h3>
+        <div class="status-live">MONITORAMENTO ATIVO</div>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">Visitas/mês</div>
+          <div class="kpi-value">4</div>
+          <div class="kpi-unit">média estabelecimentos ativos</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Não-conformidades</div>
+          <div class="kpi-value">-76%</div>
+          <div class="kpi-unit">redução em 12 meses</div>
+          <div class="kpi-trend">↓ -18pp vs. período anterior</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Pontos críticos</div>
+          <div class="kpi-value">98.7%</div>
+          <div class="kpi-unit">conformidade média PCCs</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Auditorias</div>
+          <div class="kpi-value">97%</div>
+          <div class="kpi-unit">taxa de aprovação MAPA</div>
+          <div class="kpi-trend">↑ +12pp vs. média nacional</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-asymmetric">
+      <div>
+        <h2 class="mb-24">Monitoramento baseado em KPIs auditáveis</h2>
+        <p>Visitas técnicas periódicas com verificação de pontos críticos de controle (PCCs), registros obrigatórios e conformidade regulatória. Todos os dados são registrados na plataforma QualySys para rastreabilidade total.</p>
+
+        <!-- INTENTIONAL STRUCTURE: Monitoring points with real frequencies -->
+        <h3 style="margin-top:48px;margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:2px;color:#2f6535;">Pontos de verificação</h3>
+        <div class="monitoring-points">
+          <div class="point-item">
+            <div class="point-frequency">DIÁRIA</div>
+            <div class="point-content">
+              <h4>Temperaturas PCCs</h4>
+              <p>Câmaras frias, túneis de congelamento, termômetros calibrados</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="point-frequency">SEMANAL</div>
+            <div class="point-content">
+              <h4>Análises microbiológicas</h4>
+              <p>Superfícies, manipuladores, água, produto acabado</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="point-frequency">SEMANAL</div>
+            <div class="point-content">
+              <h4>Controle de pragas</h4>
+              <p>Verificação de iscas, armadilhas e registros do PCO</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="point-frequency">MENSAL</div>
+            <div class="point-content">
+              <h4>Auditoria interna PPHO</h4>
+              <p>Verificação de todos os 8 programas e registros obrigatórios</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="point-frequency">MENSAL</div>
+            <div class="point-content">
+              <h4>Calibração de equipamentos</h4>
+              <p>Balanças, termômetros, pHmetros conforme INMETRO</p>
+            </div>
+          </div>
+          <div class="point-item">
+            <div class="point-frequency">TRIMESTRAL</div>
+            <div class="point-content">
+              <h4>Treinamento de reciclagem</h4>
+              <p>Atualização de manipuladores e verificação de eficácia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card-elevated mb-32">
+          <img src="../assets/images/monitoring-dashboard.jpg" alt="Acompanhamento de Processos" style="border-radius:12px;margin-bottom:20px;">
+          
+          <!-- Visit calendar showing real frequency -->
+          <div class="visit-calendar">
+            <div class="calendar-header">Frequência de visitas (2025)</div>
+            <div class="calendar-months">
+              <div class="month-block active">
+                <span>JAN</span>
+                <span class="visits-count">4</span>
+              </div>
+              <div class="month-block active">
+                <span>FEV</span>
+                <span class="visits-count">4</span>
+              </div>
+              <div class="month-block active">
+                <span>MAR</span>
+                <span class="visits-count">5</span>
+              </div>
+              <div class="month-block active">
+                <span>ABR</span>
+                <span class="visits-count">4</span>
+              </div>
+              <div class="month-block active">
+                <span>MAI</span>
+                <span class="visits-count">4</span>
+              </div>
+              <div class="month-block active">
+                <span>JUN</span>
+                <span class="visits-count">4</span>
+              </div>
+              <div class="month-block">
+                <span>JUL</span>
+                <span class="visits-count">—</span>
+              </div>
+              <div class="month-block">
+                <span>AGO</span>
+                <span class="visits-count">—</span>
+              </div>
+              <div class="month-block">
+                <span>SET</span>
+                <span class="visits-count">—</span>
+              </div>
+              <div class="month-block">
+                <span>OUT</span>
+                <span class="visits-count">—</span>
+              </div>
+              <div class="month-block">
+                <span>NOV</span>
+                <span class="visits-count">—</span>
+              </div>
+              <div class="month-block">
+                <span>DEZ</span>
+                <span class="visits-count">—</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#f4f7f4;border-radius:16px;padding:24px;">
+          <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:2px;color:#2f6535;margin-bottom:16px;">Entregáveis por visita</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;">
+            <li style="font-size:13px;color:#1a3d1f;font-weight:500;">✓ Relatório fotográfico georreferenciado</li>
+            <li style="font-size:13px;color:#1a3d1f;font-weight:500;">✓ Checklist de conformidade assinado</li>
+            <li style="font-size:13px;color:#1a3d1f;font-weight:500;">✓ Plano de ações corretivas (quando aplicável)</li>
+            <li style="font-size:13px;color:#1a3d1f;font-weight:500;">✓ Atualização de registros na plataforma</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2 class="mb-16">Contratar monitoramento contínuo</h2>
+    <p>Planos mensais com visitas periódicas e acesso total à plataforma QualySys.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> Solicitar proposta
+      </a>
+      <a href="sistemas-informatizados.html" class="btn btn-ghost">Conhecer plataforma</a>
+    </div>
+  </div>
+</section>
+
+<section class="related-services surface">
+  <div class="container">
+    <h2 style="margin-bottom:28px;font-size:18px;text-transform:uppercase;letter-spacing:2px;color:#2f6535;">Serviços complementares</h2>
+    <div class="related-grid">
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>Gestão de Qualidade</h3>
+        <p>Programas de autocontrole completos (BPF, PPHO, HACCP).</p>
+        <a href="gestao-de-qualidade.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Treinamento</h3>
+        <p>Capacitação técnica para sua equipe de produção.</p>
+        <a href="treinamento-e-capacitacao.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card lime">
+        <div class="service-icon">💻</div>
+        <h3>Plataforma QualySys</h3>
+        <p>Gestão digital de documentos e registros obrigatórios.</p>
+        <a href="sistemas-informatizados.html" class="service-link">Conhecer →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-info">
+        <div class="footer-brand">Qualyvet<span>.</span></div>
+        <p>R. Ver. Ivo Cláudio Weigel, 228<br>Renascença — Santa Cruz do Sul / RS</p>
+        <p>(51) 3121-3066</p>
+        <p>contato@qualyvetconsultoria.com.br</p>
+        <p style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.4);">CNPJ 24.184.899/0001-08</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Serviços</div>
+        <a href="gestao-de-qualidade.html">Gestão de Qualidade</a>
+        <a href="planejamento-industrial.html">Planejamento Industrial</a>
+        <a href="treinamento-e-capacitacao.html">Treinamento</a>
+        <a href="assessoria-e-consultoria.html">Assessoria e Consultoria</a>
+        <a href="acompanhamento-de-processos.html">Acompanhamento</a>
+        <a href="sistemas-informatizados.html">Sistema QualySys</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Artigos</div>
+        <a href="../artigos/o-que-e-sif.html">O que é o SIF?</a>
+        <a href="../artigos/sisbi-poa-vs-sif.html">SISBI-POA vs SIF</a>
+        <a href="../artigos/programas-de-autocontrole.html">Programas de Autocontrole</a>
+        <a href="../artigos/como-obter-registro-mapa.html">Como obter registro MAPA</a>
+        <a href="../artigos/haccp-o-que-e.html">O que é HACCP?</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Links</div>
+        <a href="../index.html">Início</a>
+        <a href="../sobre.html">Quem Somos</a>
+        <a href="../trabalhe-conosco.html">Trabalhe Conosco</a>
+        <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank">Plataforma QualySys</a>
+        <a href="../contato.html">Contato</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Qualyvet Consultoria e Assessoria LTDA. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assessoria e Consultoria | Qualyvet Consultoria</title>
+  <meta name="description" content="Otimizamos produção, eficiência e conformidade regulatória para empresas de Produtos de Origem Animal.">
+  <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">
+      <img src="../assets/images/qualyvet.png" alt="Qualyvet Consultoria">
+    </a>
+    <nav class="main-nav">
+      <a href="../index.html">Início</a>
+      <a href="../sobre.html">Quem Somos</a>
+      <a href="gestao-de-qualidade.html" class="active">Serviços</a>
+      <a href="../artigos/index.html">Artigos</a>
+      <a href="../contato.html">Contato</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank" rel="noopener" class="btn-platform">🔐 Plataforma</a>
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Início</a> / <a href="gestao-de-qualidade.html">Serviços</a> / <span>Assessoria e Consultoria</span>
+    </div>
+    <h1>Assessoria e Consultoria Regulatória</h1>
+    <p>Protocolar, acompanhar e obter aprovações junto aos órgãos reguladores: MAPA, ANVISA, IMA, INMETRO, SEAPI</p>
+  </div>
+</div>
+
+<!-- Regulatory Coverage Radar - Signature Element -->
+<section class="regulatory-radar-section">
+  <div class="container">
+    <div class="radar-layout">
+      <div class="radar-info">
+        <span class="section-label">Cobertura Regulatória</span>
+        <h2>Abrangência Nacional de Registros</h2>
+        <p>Protocolamos e obtemos aprovações em todos os níveis de inspeção sanitária e órgãos reguladores do Brasil.</p>
+        
+        <div class="regulatory-organs">
+          <div class="organ-badge"><i class="fas fa-check-circle"></i> MAPA</div>
+          <div class="organ-badge"><i class="fas fa-check-circle"></i> ANVISA</div>
+          <div class="organ-badge"><i class="fas fa-check-circle"></i> INMETRO</div>
+          <div class="organ-badge"><i class="fas fa-check-circle"></i> IMA</div>
+          <div class="organ-badge"><i class="fas fa-check-circle"></i> SEAPI</div>
+        </div>
+
+        <div class="timeline-info glass-dark">
+          <div class="timeline-header">
+            <i class="far fa-clock"></i>
+            <strong>Prazo médio de aprovação</strong>
+          </div>
+          <div class="timeline-range">60 a 180 dias</div>
+          <p class="timeline-note">Varia conforme órgão e complexidade do estabelecimento</p>
+        </div>
+      </div>
+
+      <div class="radar-visual glass-dark">
+        <canvas id="coverageRadar" width="400" height="400"></canvas>
+        <div class="radar-legend">
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#22c55e;"></span>
+            <span>SIF — Federal</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#3b82f6;"></span>
+            <span>SIE — Estadual</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#a855f7;"></span>
+            <span>SIM — Municipal</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#f59e0b;"></span>
+            <span>Exportação</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background:#84cc16;"></span>
+            <span>Orgânico</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Registration Types - Bento Grid -->
+<section class="registration-types">
+  <div class="container">
+    <span class="section-label">Tipos de registro</span>
+    <h2>Atuamos em todos os níveis de inspeção</h2>
+    
+    <div class="grid-bento">
+      <div class="bento-card bento-large hover-glow" data-type="sif">
+        <div class="bento-icon">🏛️</div>
+        <h3>Registro SIF (Federal)</h3>
+        <p>Serviço de Inspeção Federal — MAPA</p>
+        <ul class="deliverables">
+          <li>Elaborar memorial descritivo técnico</li>
+          <li>Protocolar documentação no MAPA/DIPOA</li>
+          <li>Acompanhar vistoria técnica</li>
+          <li>Obter certificado de registro</li>
+        </ul>
+        <div class="process-tag">Prazo: 120-180 dias</div>
+      </div>
+
+      <div class="bento-card hover-glow" data-type="sie">
+        <div class="bento-icon">🏢</div>
+        <h3>Registro SIE (Estadual)</h3>
+        <p>Serviço de Inspeção Estadual — SEAPI/IMA</p>
+        <ul class="deliverables">
+          <li>Preparar projeto técnico</li>
+          <li>Protocolar no órgão estadual</li>
+          <li>Coordenar vistoria</li>
+          <li>Emitir alvará sanitário</li>
+        </ul>
+        <div class="process-tag">Prazo: 90-150 dias</div>
+      </div>
+
+      <div class="bento-card hover-glow" data-type="sim">
+        <div class="bento-icon">🏘️</div>
+        <h3>Registro SIM (Municipal)</h3>
+        <p>Serviço de Inspeção Municipal</p>
+        <ul class="deliverables">
+          <li>Elaborar projeto sanitário</li>
+          <li>Protocolar na prefeitura</li>
+          <li>Acompanhar inspeção local</li>
+          <li>Obter licença municipal</li>
+        </ul>
+        <div class="process-tag">Prazo: 60-120 dias</div>
+      </div>
+
+      <div class="bento-card bento-wide hover-glow" data-type="export">
+        <div class="bento-icon">✈️</div>
+        <h3>Habilitação para Exportação</h3>
+        <p>Certificação para mercados internacionais</p>
+        <ul class="deliverables">
+          <li>Preparar dossiê técnico por país</li>
+          <li>Protocolar habilitação MAPA/SDA</li>
+          <li>Coordenar auditorias internacionais</li>
+          <li>Obter certificado de habilitação</li>
+        </ul>
+        <div class="process-tag">Prazo: 180+ dias</div>
+      </div>
+
+      <div class="bento-card hover-glow" data-type="organic">
+        <div class="bento-icon">🌱</div>
+        <h3>Certificação Orgânica</h3>
+        <p>Registro de produtos orgânicos — MAPA</p>
+        <ul class="deliverables">
+          <li>Adequar processos orgânicos</li>
+          <li>Protocolar no MAPA</li>
+          <li>Auditorias de conformidade</li>
+          <li>Obter selo SisOrg</li>
+        </ul>
+        <div class="process-tag">Prazo: 90-180 dias</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Bureaucratic Process Flow -->
+<section class="process-flow-section surface">
+  <div class="container">
+    <span class="section-label">Fluxo de trabalho</span>
+    <h2>Etapas burocráticas do processo de registro</h2>
+    <p style="max-width:700px;margin:0 auto 40px;text-align:center;opacity:0.8;">
+      Cada registro passa por etapas obrigatórias definidas pelos órgãos reguladores. Gerenciamos todas as fases para você.
+    </p>
+
+    <div class="process-timeline">
+      <div class="process-step">
+        <div class="step-number">01</div>
+        <div class="step-content glass-dark">
+          <h3>Análise Documental</h3>
+          <p>Levantamento de requisitos e preparação do dossiê técnico</p>
+          <div class="step-deliverables">
+            <span>Memorial descritivo</span>
+            <span>Plantas baixas</span>
+            <span>Fluxograma</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="step-number">02</div>
+        <div class="step-content glass-dark">
+          <h3>Protocolo</h3>
+          <p>Abertura oficial do processo junto ao órgão competente</p>
+          <div class="step-deliverables">
+            <span>Número de processo</span>
+            <span>Comprovante de protocolo</span>
+            <span>Taxa paga</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="step-number">03</div>
+        <div class="step-content glass-dark">
+          <h3>Vistoria Técnica</h3>
+          <p>Inspeção presencial do estabelecimento pelos fiscais</p>
+          <div class="step-deliverables">
+            <span>Relatório de vistoria</span>
+            <span>Checklist atendido</span>
+            <span>Fotos oficiais</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="step-number">04</div>
+        <div class="step-content glass-dark">
+          <h3>Análise e Adequações</h3>
+          <p>Resposta a exigências e correções solicitadas</p>
+          <div class="step-deliverables">
+            <span>Respostas técnicas</span>
+            <span>Adequações realizadas</span>
+            <span>Nova vistoria (se necessário)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="step-number">05</div>
+        <div class="step-content glass-dark">
+          <h3>Deferimento</h3>
+          <p>Emissão do registro, alvará ou certificado oficial</p>
+          <div class="step-deliverables">
+            <span>Certificado emitido</span>
+            <span>Número de registro</span>
+            <span>Alvará publicado</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Additional Services -->
+<section class="additional-services">
+  <div class="container">
+    <span class="section-label">Serviços complementares</span>
+    <h2>Acompanhamento contínuo após aprovação</h2>
+    
+    <div class="services-grid">
+      <div class="service-item glass-dark">
+        <div class="service-icon-small">📋</div>
+        <h4>Renovação de alvarás</h4>
+        <p>Protocolar renovações anuais junto aos órgãos</p>
+      </div>
+
+      <div class="service-item glass-dark">
+        <div class="service-icon-small">🔄</div>
+        <h4>Alterações cadastrais</h4>
+        <p>Atualizar dados, produtos e processos produtivos</p>
+      </div>
+
+      <div class="service-item glass-dark">
+        <div class="service-icon-small">📊</div>
+        <h4>Relatórios de auditoria</h4>
+        <p>Preparar documentação para fiscalizações oficiais</p>
+      </div>
+
+      <div class="service-item glass-dark">
+        <div class="service-icon-small">⚠️</div>
+        <h4>Resposta a notificações</h4>
+        <p>Defesa técnica em casos de auto de infração</p>
+      </div>
+
+      <div class="service-item glass-dark">
+        <div class="service-icon-small">📦</div>
+        <h4>Registro de novos produtos</h4>
+        <p>Protocolar inclusão de produtos no registro</p>
+      </div>
+
+      <div class="service-item glass-dark">
+        <div class="service-icon-small">🏗️</div>
+        <h4>Ampliação de instalações</h4>
+        <p>Atualizar registro após obras e melhorias</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visual Section -->
+<section style="padding:60px 0;background:#f4f7f4;">
+  <div class="container">
+    <div style="max-width:900px;margin:0 auto;">
+      <img src="../assets/images/regulatory-documents.jpg" alt="Documentação regulatória MAPA" style="width:100%;border-radius:20px;box-shadow:0 8px 32px rgba(47,101,53,0.12);">
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <span class="section-label">Comece seu processo</span>
+    <h2>Protocolar registro sanitário</h2>
+    <p>Entre em contato para receber uma análise preliminar gratuita e cronograma do seu processo de registro.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> Falar com especialista
+      </a>
+      <a href="../contato.html" class="btn btn-ghost">Solicitar orçamento</a>
+    </div>
+  </div>
+</section>
+
+<section class="related-services surface">
+  <div class="container">
+    <span class="section-label">Outros serviços</span>
+    <h2 style="margin-bottom:28px;">Serviços relacionados</h2>
+    <div class="related-grid">
+      <div class="service-card">
+        <div class="service-icon">🏭</div>
+        <h3>Gestão de Qualidade</h3>
+        <p>Implementar programas de autocontrole obrigatórios.</p>
+        <a href="gestao-de-qualidade.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📐</div>
+        <h3>Planejamento Industrial</h3>
+        <p>Projetar layout e fluxos produtivos conformes.</p>
+        <a href="planejamento-industrial.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔍</div>
+        <h3>Acompanhamento de Processos</h3>
+        <p>Monitorar protocolos e prazos oficiais em tempo real.</p>
+        <a href="acompanhamento-de-processos.html" class="service-link">Ver detalhes →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-info">
+        <div class="footer-brand">Qualyvet<span>.</span></div>
+        <p>R. Ver. Ivo Cláudio Weigel, 228<br>Renascença — Santa Cruz do Sul / RS</p>
+        <p>(51) 3121-3066</p>
+        <p>contato@qualyvetconsultoria.com.br</p>
+        <p style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.4);">CNPJ 24.184.899/0001-08</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Serviços</div>
+        <a href="gestao-de-qualidade.html">Gestão de Qualidade</a>
+        <a href="planejamento-industrial.html">Planejamento Industrial</a>
+        <a href="treinamento-e-capacitacao.html">Treinamento</a>
+        <a href="assessoria-e-consultoria.html">Assessoria e Consultoria</a>
+        <a href="acompanhamento-de-processos.html">Acompanhamento</a>
+        <a href="sistemas-informatizados.html">Sistema QualySys</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Artigos</div>
+        <a href="../artigos/o-que-e-sif.html">O que é o SIF?</a>
+        <a href="../artigos/sisbi-poa-vs-sif.html">SISBI-POA vs SIF</a>
+        <a href="../artigos/programas-de-autocontrole.html">Programas de Autocontrole</a>
+        <a href="../artigos/como-obter-registro-mapa.html">Como obter registro MAPA</a>
+        <a href="../artigos/haccp-o-que-e.html">O que é HACCP?</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Links</div>
+        <a href="../index.html">Início</a>
+        <a href="../sobre.html">Quem Somos</a>
+        <a href="../trabalhe-conosco.html">Trabalhe Conosco</a>
+        <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank">Plataforma QualySys</a>
+        <a href="../contato.html">Contato</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Qualyvet Consultoria e Assessoria LTDA. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script>
+// Regulatory Coverage Radar Chart
+(function() {
+  const canvas = document.getElementById('coverageRadar');
+  if (!canvas) return;
+  
+  const ctx = canvas.getContext('2d');
+  const centerX = canvas.width / 2;
+  const centerY = canvas.height / 2;
+  const maxRadius = Math.min(centerX, centerY) - 60;
+  
+  // Data for each regulatory axis
+  const data = [
+    { label: 'SIF\nFederal', value: 100, color: '#22c55e', angle: 0 },
+    { label: 'SIE\nEstadual', value: 100, color: '#3b82f6', angle: Math.PI * 2 / 5 },
+    { label: 'SIM\nMunicipal', value: 100, color: '#a855f7', angle: Math.PI * 4 / 5 },
+    { label: 'Exportação', value: 95, color: '#f59e0b', angle: Math.PI * 6 / 5 },
+    { label: 'Orgânico', value: 90, color: '#84cc16', angle: Math.PI * 8 / 5 }
+  ];
+  
+  // Draw background grid circles
+  function drawGrid() {
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+    ctx.lineWidth = 1;
+    
+    for (let i = 1; i <= 5; i++) {
+      const radius = (maxRadius / 5) * i;
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+  }
+  
+  // Draw axis lines
+  function drawAxes() {
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+    ctx.lineWidth = 1;
+    
+    data.forEach(item => {
+      const x = centerX + Math.cos(item.angle - Math.PI / 2) * maxRadius;
+      const y = centerY + Math.sin(item.angle - Math.PI / 2) * maxRadius;
+      
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    });
+  }
+  
+  // Draw labels
+  function drawLabels() {
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.font = '600 12px Roboto';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    
+    data.forEach(item => {
+      const labelRadius = maxRadius + 35;
+      const x = centerX + Math.cos(item.angle - Math.PI / 2) * labelRadius;
+      const y = centerY + Math.sin(item.angle - Math.PI / 2) * labelRadius;
+      
+      const lines = item.label.split('\n');
+      lines.forEach((line, i) => {
+        ctx.fillText(line, x, y + (i - 0.5) * 14);
+      });
+    });
+  }
+  
+  // Draw coverage area
+  function drawCoverage() {
+    ctx.beginPath();
+    
+    data.forEach((item, index) => {
+      const radius = (item.value / 100) * maxRadius;
+      const x = centerX + Math.cos(item.angle - Math.PI / 2) * radius;
+      const y = centerY + Math.sin(item.angle - Math.PI / 2) * radius;
+      
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    
+    ctx.closePath();
+    
+    // Fill
+    const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, maxRadius);
+    gradient.addColorStop(0, 'rgba(132, 204, 22, 0.3)');
+    gradient.addColorStop(1, 'rgba(34, 197, 94, 0.1)');
+    ctx.fillStyle = gradient;
+    ctx.fill();
+    
+    // Stroke
+    ctx.strokeStyle = 'rgba(132, 204, 22, 0.8)';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+  }
+  
+  // Draw data points
+  function drawPoints() {
+    data.forEach(item => {
+      const radius = (item.value / 100) * maxRadius;
+      const x = centerX + Math.cos(item.angle - Math.PI / 2) * radius;
+      const y = centerY + Math.sin(item.angle - Math.PI / 2) * radius;
+      
+      // Outer glow
+      const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, 12);
+      glowGradient.addColorStop(0, item.color + '80');
+      glowGradient.addColorStop(1, item.color + '00');
+      ctx.fillStyle = glowGradient;
+      ctx.beginPath();
+      ctx.arc(x, y, 12, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Point
+      ctx.fillStyle = item.color;
+      ctx.beginPath();
+      ctx.arc(x, y, 6, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Inner highlight
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      ctx.beginPath();
+      ctx.arc(x - 1.5, y - 1.5, 2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+  
+  // Draw center indicator
+  function drawCenter() {
+    ctx.fillStyle = 'rgba(132, 204, 22, 0.3)';
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, 8, 0, Math.PI * 2);
+    ctx.fill();
+    
+    ctx.strokeStyle = 'rgba(132, 204, 22, 0.8)';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+  
+  // Animate radar
+  let animationProgress = 0;
+  function animate() {
+    if (animationProgress >= 1) return;
+    
+    animationProgress += 0.02;
+    const eased = 1 - Math.pow(1 - animationProgress, 3); // ease out cubic
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    drawGrid();
+    drawAxes();
+    
+    // Animate coverage
+    const originalData = [...data];
+    data.forEach((item, i) => {
+      item.value = originalData[i].value * eased;
+    });
+    
+    drawCoverage();
+    drawPoints();
+    drawCenter();
+    drawLabels();
+    
+    // Restore original values
+    data.forEach((item, i) => {
+      item.value = originalData[i].value;
+    });
+    
+    requestAnimationFrame(animate);
+  }
+  
+  // Start animation when element is visible
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animate();
+        observer.disconnect();
+      }
+    });
+  });
+  
+  observer.observe(canvas);
+  
+  // Initial draw (without animation for immediate visibility)
+  drawGrid();
+  drawAxes();
+  drawLabels();
+})();
+</script>
+</body>
+</html>

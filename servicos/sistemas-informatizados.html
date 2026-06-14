@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plataforma QualySys | Qualyvet Consultoria</title>
+  <meta name="description" content="Gestão digital de documentos POA com acesso 24/7. Programas de autocontrole e registros obrigatórios na nuvem.">
+  <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* Signature element: Platform Feature Preview */
+    .platform-preview {
+      background: linear-gradient(135deg, #0f1e11 0%, #1a3d1f 100%);
+      border-radius: 32px;
+      padding: 64px 48px 48px;
+      margin: 64px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .platform-preview::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(153,181,51,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .preview-header {
+      text-align: center;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    .preview-header h3 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .preview-header h2 {
+      font-family: 'Roboto Slab', serif;
+      font-size: 42px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #99b533 0%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+    }
+    .preview-header p {
+      color: rgba(255,255,255,0.7);
+      font-size: 15px;
+    }
+    
+    /* Feature showcase grid */
+    .features-showcase {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+    .feature-module {
+      background: rgba(255,255,255,0.06);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(153,181,51,0.2);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-module::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #99b533 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .feature-module:hover {
+      background: rgba(255,255,255,0.10);
+      border-color: #99b533;
+      transform: translateY(-8px);
+    }
+    .feature-module:hover::before {
+      opacity: 1;
+    }
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(153,181,51,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .feature-module h4 {
+      font-size: 16px;
+      color: #fff;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+    .feature-module p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .feature-tag {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      background: rgba(153,181,51,0.2);
+      border: 1px solid rgba(153,181,51,0.3);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #99b533;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Document types list */
+    .document-types {
+      margin: 48px 0;
+    }
+    .doc-category {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 16px;
+      border-left: 4px solid #e0e8e0;
+      transition: all 0.2s ease;
+    }
+    .doc-category:hover {
+      border-left-color: #2f6535;
+      box-shadow: 0 4px 16px rgba(47,101,53,0.08);
+      transform: translateX(4px);
+    }
+    .doc-category-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .doc-count {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 18px;
+      font-weight: 900;
+      color: #2f6535;
+      min-width: 40px;
+    }
+    .doc-category h4 {
+      font-size: 16px;
+      color: #1a3d1f;
+      margin: 0;
+    }
+    .doc-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .doc-item {
+      font-size: 12px;
+      color: #666;
+      background: #f4f7f4;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+    
+    /* Platform stats */
+    .platform-stats {
+      background: #f4f7f4;
+      border-radius: 20px;
+      padding: 40px;
+      margin: 48px 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-item .stat-number {
+      font-family: 'Roboto Slab', serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: #2f6535;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-item .stat-label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    
+    @media (max-width: 1024px) {
+      .features-showcase {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .platform-preview {
+        padding: 48px 24px 32px;
+      }
+      .preview-header h2 {
+        font-size: 32px;
+      }
+      .features-showcase {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .stat-item .stat-number {
+        font-size: 36px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">
+      <img src="../assets/images/qualyvet.png" alt="Qualyvet Consultoria">
+    </a>
+    <nav class="main-nav">
+      <a href="../index.html">Início</a>
+      <a href="../sobre.html">Quem Somos</a>
+      <a href="gestao-de-qualidade.html" class="active">Serviços</a>
+      <a href="../artigos/index.html">Artigos</a>
+      <a href="../contato.html">Contato</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank" rel="noopener" class="btn-platform">🔐 Plataforma</a>
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Início</a> / <a href="gestao-de-qualidade.html">Serviços</a> / <span>Plataforma QualySys</span>
+    </div>
+    <h1>Plataforma QualySys</h1>
+    <p style="max-width:640px;">Gestão digital de documentos POA com acesso 24/7. Programas de autocontrole e registros obrigatórios na nuvem.</p>
+  </div>
+</div>
+
+<section class="service-detail">
+  <div class="container">
+    
+    <!-- SIGNATURE ELEMENT: Platform Feature Preview -->
+    <div class="platform-preview">
+      <div class="preview-header">
+        <h3>Sistema exclusivo clientes</h3>
+        <h2>QualySys Cloud</h2>
+        <p>Todos os documentos obrigatórios do seu estabelecimento disponíveis 24/7 em qualquer dispositivo</p>
+      </div>
+      
+      <div class="features-showcase">
+        <div class="feature-module">
+          <div class="feature-icon">📋</div>
+          <h4>Programas de Autocontrole</h4>
+          <p>BPF, PPHO (8 programas), HACCP completos e atualizados conforme legislação vigente</p>
+          <span class="feature-tag">MAPA Compliant</span>
+        </div>
+        
+        <div class="feature-module">
+          <div class="feature-icon">📊</div>
+          <h4>Registros Obrigatórios</h4>
+          <p>Formulários digitais para temperaturas, análises, calibrações e controle de pragas</p>
+          <span class="feature-tag">Rastreável</span>
+        </div>
+        
+        <div class="feature-module">
+          <div class="feature-icon">📸</div>
+          <h4>Relatórios Fotográficos</h4>
+          <p>Registro visual georreferenciado de visitas técnicas e auditorias internas</p>
+          <span class="feature-tag">Geolocalizado</span>
+        </div>
+        
+        <div class="feature-module">
+          <div class="feature-icon">🎓</div>
+          <h4>Certificados de Treinamento</h4>
+          <p>Histórico completo de capacitações, validades e reciclagens da equipe</p>
+          <span class="feature-tag">Válido MAPA</span>
+        </div>
+        
+        <div class="feature-module">
+          <div class="feature-icon">🔔</div>
+          <h4>Alertas Automáticos</h4>
+          <p>Notificações de vencimento de análises, calibrações e certificados</p>
+          <span class="feature-tag">Proativo</span>
+        </div>
+        
+        <div class="feature-module">
+          <div class="feature-icon">📈</div>
+          <h4>Indicadores de Conformidade</h4>
+          <p>Dashboards com KPIs de não-conformidades e status de programas</p>
+          <span class="feature-tag">Real-time</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-asymmetric">
+      <div>
+        <h2 class="mb-24">Documentação digital pronta para fiscalização</h2>
+        <p>A plataforma QualySys centraliza todos os documentos obrigatórios do seu estabelecimento em ambiente seguro na nuvem. Durante vistorias do MAPA, acesse instantaneamente qualquer registro ou programa de autocontrole.</p>
+
+        <!-- INTENTIONAL STRUCTURE: Documents by regulatory category -->
+        <h3 style="margin-top:48px;margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:2px;color:#2f6535;">Documentos disponíveis</h3>
+        <div class="document-types">
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-count">09</span>
+              <h4>Programas PPHO</h4>
+            </div>
+            <div class="doc-list">
+              <span class="doc-item">Potabilidade da água</span>
+              <span class="doc-item">Higiene de superfícies</span>
+              <span class="doc-item">Prevenção cruzada</span>
+              <span class="doc-item">Higiene pessoal</span>
+              <span class="doc-item">Proteção adulteração</span>
+              <span class="doc-item">Rotulagem química</span>
+              <span class="doc-item">Controle pragas</span>
+              <span class="doc-item">Instalações</span>
+            </div>
+          </div>
+          
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-count">02</span>
+              <h4>Manuais Técnicos</h4>
+            </div>
+            <div class="doc-list">
+              <span class="doc-item">Manual BPF</span>
+              <span class="doc-item">Plano HACCP/APPCC</span>
+            </div>
+          </div>
+          
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-count">18</span>
+              <h4>Registros de Controle</h4>
+            </div>
+            <div class="doc-list">
+              <span class="doc-item">Temperaturas PCCs</span>
+              <span class="doc-item">Análises microbiológicas</span>
+              <span class="doc-item">Calibração equipamentos</span>
+              <span class="doc-item">Controle CIP</span>
+              <span class="doc-item">Monitoramento pragas</span>
+              <span class="doc-item">Saúde manipuladores</span>
+              <span class="doc-item">Recebimento MP</span>
+              <span class="doc-item">Expedição produtos</span>
+            </div>
+          </div>
+          
+          <div class="doc-category">
+            <div class="doc-category-header">
+              <span class="doc-count">04</span>
+              <h4>Gestão de RH</h4>
+            </div>
+            <div class="doc-list">
+              <span class="doc-item">Certificados treinamento</span>
+              <span class="doc-item">ASOs válidos</span>
+              <span class="doc-item">Registro presença</span>
+              <span class="doc-item">Avaliação eficácia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card-elevated mb-32">
+          <img src="../assets/images/qualysys2.jpg" alt="Plataforma QualySys" style="border-radius:12px;margin-bottom:24px;">
+          
+          <h3 style="font-size:16px;margin-bottom:16px;color:#1a3d1f;">Recursos técnicos</h3>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
+            <li style="display:flex;align-items:start;gap:12px;">
+              <span style="color:#2f6535;font-size:18px;">✓</span>
+              <span style="font-size:13px;color:#666;"><strong>Acesso multiusuário:</strong> RT, produção, laboratório com permissões diferenciadas</span>
+            </li>
+            <li style="display:flex;align-items:start;gap:12px;">
+              <span style="color:#2f6535;font-size:18px;">✓</span>
+              <span style="font-size:13px;color:#666;"><strong>Backup automático:</strong> Replicação em 3 datacenters, retenção 7 anos</span>
+            </li>
+            <li style="display:flex;align-items:start;gap:12px;">
+              <span style="color:#2f6535;font-size:18px;">✓</span>
+              <span style="font-size:13px;color:#666;"><strong>SSL/TLS:</strong> Criptografia ponta-a-ponta LGPD compliant</span>
+            </li>
+            <li style="display:flex;align-items:start;gap:12px;">
+              <span style="color:#2f6535;font-size:18px;">✓</span>
+              <span style="font-size:13px;color:#666;"><strong>App móvel:</strong> iOS/Android para registros in loco</span>
+            </li>
+            <li style="display:flex;align-items:start;gap:12px;">
+              <span style="color:#2f6535;font-size:18px;">✓</span>
+              <span style="font-size:13px;color:#666;"><strong>API REST:</strong> Integração com ERPs e sistemas corporativos</span>
+            </li>
+          </ul>
+
+          <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%;justify-content:center;">
+            🔐 Acessar plataforma
+          </a>
+        </div>
+
+        <!-- Platform statistics -->
+        <div style="background:#f4f7f4;border-radius:16px;padding:28px;">
+          <h3 style="font-size:14px;text-transform:uppercase;letter-spacing:2px;color:#2f6535;margin-bottom:20px;">Dados da plataforma</h3>
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#2f6535;font-family:'Roboto Slab',serif;">99.8%</div>
+              <div style="font-size:11px;color:#666;">Uptime 2025</div>
+            </div>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#2f6535;font-family:'Roboto Slab',serif;">147</div>
+              <div style="font-size:11px;color:#666;">Estabelecimentos ativos</div>
+            </div>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#2f6535;font-family:'Roboto Slab',serif;">2.4k</div>
+              <div style="font-size:11px;color:#666;">Documentos gerenciados</div>
+            </div>
+            <div>
+              <div style="font-size:28px;font-weight:900;color:#2f6535;font-family:'Roboto Slab',serif;">< 2h</div>
+              <div style="font-size:11px;color:#666;">Tempo médio de suporte</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2 class="mb-16">Acessar plataforma QualySys</h2>
+    <p>Disponível exclusivamente para clientes Qualyvet com contrato de acompanhamento.</p>
+    <div class="cta-actions">
+      <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        🔐 Fazer login
+      </a>
+      <a href="acompanhamento-de-processos.html" class="btn btn-ghost">Contratar monitoramento</a>
+    </div>
+  </div>
+</section>
+
+<section class="related-services surface">
+  <div class="container">
+    <h2 style="margin-bottom:28px;font-size:18px;text-transform:uppercase;letter-spacing:2px;color:#2f6535;">Serviços que incluem QualySys</h2>
+    <div class="related-grid">
+      <div class="service-card">
+        <div class="service-icon">👁️</div>
+        <h3>Acompanhamento de Processos</h3>
+        <p>Monitoramento contínuo com acesso total à plataforma.</p>
+        <a href="acompanhamento-de-processos.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📋</div>
+        <h3>Gestão de Qualidade</h3>
+        <p>Programas de autocontrole com entrega digital.</p>
+        <a href="gestao-de-qualidade.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Treinamento</h3>
+        <p>Certificados armazenados e disponíveis na nuvem.</p>
+        <a href="treinamento-e-capacitacao.html" class="service-link">Ver detalhes →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-info">
+        <div class="footer-brand">Qualyvet<span>.</span></div>
+        <p>R. Ver. Ivo Cláudio Weigel, 228<br>Renascença — Santa Cruz do Sul / RS</p>
+        <p>(51) 3121-3066</p>
+        <p>contato@qualyvetconsultoria.com.br</p>
+        <p style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.4);">CNPJ 24.184.899/0001-08</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Serviços</div>
+        <a href="gestao-de-qualidade.html">Gestão de Qualidade</a>
+        <a href="planejamento-industrial.html">Planejamento Industrial</a>
+        <a href="treinamento-e-capacitacao.html">Treinamento</a>
+        <a href="assessoria-e-consultoria.html">Assessoria e Consultoria</a>
+        <a href="acompanhamento-de-processos.html">Acompanhamento</a>
+        <a href="sistemas-informatizados.html">Sistema QualySys</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Artigos</div>
+        <a href="../artigos/o-que-e-sif.html">O que é o SIF?</a>
+        <a href="../artigos/sisbi-poa-vs-sif.html">SISBI-POA vs SIF</a>
+        <a href="../artigos/programas-de-autocontrole.html">Programas de Autocontrole</a>
+        <a href="../artigos/como-obter-registro-mapa.html">Como obter registro MAPA</a>
+        <a href="../artigos/haccp-o-que-e.html">O que é HACCP?</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Links</div>
+        <a href="../index.html">Início</a>
+        <a href="../sobre.html">Quem Somos</a>
+        <a href="../trabalhe-conosco.html">Trabalhe Conosco</a>
+        <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank">Plataforma QualySys</a>
+        <a href="../contato.html">Contato</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Qualyvet Consultoria e Assessoria LTDA. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

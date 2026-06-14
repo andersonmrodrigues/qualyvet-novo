@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gestão de Qualidade | Qualyvet Consultoria</title>
+  <meta name="description" content="Desenvolvemos programas de autocontrole (BPF, PPHO, HACCP) para empresas de Produtos de Origem Animal conforme a legislação do MAPA.">
+  <link rel="icon" href="../assets/images/favicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    /* Signature element: Regulatory compliance meter */
+    .compliance-meter {
+      background: linear-gradient(135deg, #1a3d1f 0%, #2f6535 100%);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 48px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .compliance-meter::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(153,181,51,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .compliance-meter h3 {
+      color: #fff;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+    .meter-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      position: relative;
+    }
+    .meter-item {
+      text-align: center;
+    }
+    .meter-number {
+      font-family: 'Roboto Slab', serif;
+      font-size: 56px;
+      font-weight: 900;
+      color: #99b533;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .meter-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    
+    /* Intentional program list: regulatory-specific */
+    .program-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin: 32px 0;
+    }
+    .program-item {
+      background: #fff;
+      border-left: 3px solid #e0e8e0;
+      padding: 16px 20px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .program-item:hover {
+      border-left-color: #2f6535;
+      background: #f9faf9;
+      transform: translateX(4px);
+    }
+    .program-code {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 11px;
+      color: #2f6535;
+      font-weight: 700;
+      min-width: 60px;
+      text-align: right;
+    }
+    .program-name {
+      font-size: 14px;
+      color: #1e1e1e;
+      font-weight: 500;
+    }
+    
+    /* Process timeline: actual sequence */
+    .process-timeline {
+      margin: 48px 0;
+      position: relative;
+    }
+    .process-timeline::before {
+      content: '';
+      position: absolute;
+      left: 30px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, #2f6535 0%, #e0e8e0 100%);
+    }
+    .process-step {
+      position: relative;
+      padding-left: 80px;
+      margin-bottom: 32px;
+    }
+    .process-step::before {
+      content: attr(data-week);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      border: 3px solid #2f6535;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto Slab', serif;
+      font-size: 16px;
+      font-weight: 900;
+      color: #2f6535;
+    }
+    .process-step h4 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      color: #1a3d1f;
+    }
+    .process-step p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    @media (max-width: 768px) {
+      .meter-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .meter-number {
+        font-size: 42px;
+      }
+      .process-step {
+        padding-left: 70px;
+      }
+      .process-step::before {
+        width: 50px;
+        height: 50px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../index.html" class="site-logo">
+      <img src="../assets/images/qualyvet.png" alt="Qualyvet Consultoria">
+    </a>
+    <nav class="main-nav">
+      <a href="../index.html">Início</a>
+      <a href="../sobre.html">Quem Somos</a>
+      <a href="gestao-de-qualidade.html" class="active">Serviços</a>
+      <a href="../artigos/index.html">Artigos</a>
+      <a href="../contato.html">Contato</a>
+    </nav>
+    <div class="header-actions">
+      <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank" rel="noopener" class="btn-platform">🔐 Plataforma</a>
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Início</a> / <a href="gestao-de-qualidade.html">Serviços</a> / <span>Gestão de Qualidade</span>
+    </div>
+    <h1>Gestão de Qualidade POA</h1>
+    <p style="max-width:640px;">20 programas de autocontrole desenvolvidos segundo portaria 368/1997 MAPA para frigoríficos, laticínios e beneficiadoras.</p>
+  </div>
+</div>
+
+<section class="service-detail">
+  <div class="container">
+    
+    <!-- SIGNATURE ELEMENT: Compliance meter showing the three pillars -->
+    <div class="compliance-meter">
+      <h3>Sistema de autocontrole conforme MAPA</h3>
+      <div class="meter-grid">
+        <div class="meter-item">
+          <div class="meter-number">BPF</div>
+          <div class="meter-label">Boas Práticas</div>
+        </div>
+        <div class="meter-item">
+          <div class="meter-number">PPHO</div>
+          <div class="meter-label">Higiene Operacional</div>
+        </div>
+        <div class="meter-item">
+          <div class="meter-number">HACCP</div>
+          <div class="meter-label">Pontos Críticos</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-detail-grid">
+      <div>
+        <h2 style="margin-bottom:24px;">Conformidade regulatória completa</h2>
+        <p>Desenvolvemos e implantamos todos os programas de autocontrole exigidos pelo MAPA para registro SIF, SIE e SIM. Seu estabelecimento recebe documentação técnica, treinamento de equipe e acompanhamento até aprovação na vistoria.</p>
+
+        <!-- INTENTIONAL STRUCTURE: Programs grouped by regulatory requirement -->
+        <h3 style="margin-top:48px;margin-bottom:16px;font-size:14px;text-transform:uppercase;letter-spacing:2px;color:#2f6535;">Programas obrigatórios MAPA</h3>
+        <div class="program-stack">
+          <div class="program-item">
+            <span class="program-code">PPHO-1</span>
+            <span class="program-name">Controle de potabilidade da água</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">PPHO-2</span>
+            <span class="program-name">Higiene de superfícies de contato</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">PPHO-3</span>
+            <span class="program-name">Prevenção de contaminação cruzada</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">PPHO-4</span>
+            <span class="program-name">Higiene pessoal e saúde dos manipuladores</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">PPHO-5</span>
+            <span class="program-name">Proteção contra adulteração</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">PPHO-6</span>
+            <span class="program-name">Rotulagem e armazenamento de produtos químicos</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">PPHO-7</span>
+            <span class="program-name">Controle de pragas</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">PPHO-8</span>
+            <span class="program-name">Condições de instalações e equipamentos</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">HACCP</span>
+            <span class="program-name">Análise de perigos e pontos críticos</span>
+          </div>
+          <div class="program-item">
+            <span class="program-code">BPF</span>
+            <span class="program-name">Manual de boas práticas de fabricação</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="service-detail-img">
+          <img src="../assets/images/quality-control.jpg" alt="Gestão de Qualidade em agroindústria">
+        </div>
+
+        <!-- PROCESS TIMELINE: Real sequence, not decoration -->
+        <div class="process-timeline" style="margin-top:32px;">
+          <div class="process-step" data-week="S1-2">
+            <h4>Diagnóstico in loco</h4>
+            <p>Vistoria técnica para identificar adequações necessárias</p>
+          </div>
+          <div class="process-step" data-week="S3-6">
+            <h4>Documentação técnica</h4>
+            <p>Elaboração de todos os POPs e programas obrigatórios</p>
+          </div>
+          <div class="process-step" data-week="S7-8">
+            <h4>Treinamento de equipe</h4>
+            <p>Capacitação in loco para execução dos programas</p>
+          </div>
+          <div class="process-step" data-week="S9+">
+            <h4>Acompanhamento</h4>
+            <p>Suporte contínuo até aprovação na vistoria MAPA</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2 style="margin-bottom:16px;">Iniciar adequação regulatória</h2>
+    <p>Diagnóstico inicial sem custo para frigoríficos e laticínios no Rio Grande do Sul.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/5551998658690" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <i class="fab fa-whatsapp"></i> Agendar diagnóstico
+      </a>
+      <a href="../contato.html" class="btn btn-ghost">Ver outros serviços</a>
+    </div>
+  </div>
+</section>
+
+<section class="related-services surface">
+  <div class="container">
+    <h2 style="margin-bottom:28px;font-size:18px;text-transform:uppercase;letter-spacing:2px;color:#2f6535;">Serviços complementares</h2>
+    <div class="related-grid">
+      <div class="service-card">
+        <div class="service-icon">📐</div>
+        <h3>Planejamento Industrial</h3>
+        <p>Projetos de adequação física para aprovação MAPA.</p>
+        <a href="planejamento-industrial.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Treinamento</h3>
+        <p>Capacitação técnica in loco para sua equipe.</p>
+        <a href="treinamento-e-capacitacao.html" class="service-link">Ver detalhes →</a>
+      </div>
+      <div class="service-card lime">
+        <div class="service-icon">💻</div>
+        <h3>Plataforma QualySys</h3>
+        <p>Documentos na nuvem com acesso 24/7.</p>
+        <a href="sistemas-informatizados.html" class="service-link">Conhecer →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-info">
+        <div class="footer-brand">Qualyvet<span>.</span></div>
+        <p>R. Ver. Ivo Cláudio Weigel, 228<br>Renascença — Santa Cruz do Sul / RS</p>
+        <p>(51) 3121-3066</p>
+        <p>contato@qualyvetconsultoria.com.br</p>
+        <p style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.4);">CNPJ 24.184.899/0001-08</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Serviços</div>
+        <a href="gestao-de-qualidade.html">Gestão de Qualidade</a>
+        <a href="planejamento-industrial.html">Planejamento Industrial</a>
+        <a href="treinamento-e-capacitacao.html">Treinamento</a>
+        <a href="assessoria-e-consultoria.html">Assessoria e Consultoria</a>
+        <a href="acompanhamento-de-processos.html">Acompanhamento</a>
+        <a href="sistemas-informatizados.html">Sistema QualySys</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Artigos</div>
+        <a href="../artigos/o-que-e-sif.html">O que é o SIF?</a>
+        <a href="../artigos/sisbi-poa-vs-sif.html">SISBI-POA vs SIF</a>
+        <a href="../artigos/programas-de-autocontrole.html">Programas de Autocontrole</a>
+        <a href="../artigos/como-obter-registro-mapa.html">Como obter registro MAPA</a>
+        <a href="../artigos/haccp-o-que-e.html">O que é HACCP?</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Links</div>
+        <a href="../index.html">Início</a>
+        <a href="../sobre.html">Quem Somos</a>
+        <a href="../trabalhe-conosco.html">Trabalhe Conosco</a>
+        <a href="https://plataforma.qualyvetconsultoria.com.br/" target="_blank">Plataforma QualySys</a>
+        <a href="../contato.html">Contato</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 Qualyvet Consultoria e Assessoria LTDA. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

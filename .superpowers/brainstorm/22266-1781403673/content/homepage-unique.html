@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Roboto', sans-serif; background: #0f1a10; color: #fff; }
+
+  /* ========== HEADER ========== */
+  header {
+    background: #0f1a10;
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .logo-text { font-size: 18px; font-weight: 900; color: #fff; letter-spacing: -0.5px; }
+  .logo-text span { color: #99b533; }
+  nav { display: flex; gap: 28px; align-items: center; }
+  nav a { font-size: 13px; color: rgba(255,255,255,0.65); text-decoration: none; transition: color .2s; }
+  nav a:hover { color: #fff; }
+  .btn-whats {
+    background: #25d366; color: #fff;
+    padding: 8px 18px; border-radius: 6px;
+    font-size: 13px; font-weight: 700;
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+  }
+  .btn-platform {
+    border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.75);
+    padding: 8px 16px; border-radius: 6px;
+    font-size: 12px; text-decoration: none;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    min-height: calc(100vh - 64px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+  .hero-left {
+    background: #0f1a10;
+    padding: 80px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(153,181,51,0.15);
+    border: 1px solid rgba(153,181,51,0.4);
+    color: #99b533;
+    padding: 5px 14px; border-radius: 30px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-bottom: 32px; width: fit-content;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; background: #99b533; border-radius: 50%; display: inline-block; }
+  .hero h1 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 52px; font-weight: 900;
+    color: #fff; line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { color: #99b533; font-style: normal; }
+  .hero-sub {
+    font-size: 16px; color: rgba(255,255,255,0.6);
+    line-height: 1.75; margin-bottom: 40px; max-width: 420px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: #25d366; color: #fff;
+    padding: 14px 28px; border-radius: 8px;
+    font-size: 14px; font-weight: 700;
+    text-decoration: none; display: flex; align-items: center; gap: 8px;
+  }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.8);
+    padding: 14px 28px; border-radius: 8px;
+    font-size: 14px; text-decoration: none;
+  }
+
+  .hero-right {
+    position: relative;
+    background: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80') center/cover;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 40px;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(15,26,16,0.5) 0%, rgba(47,101,53,0.3) 100%);
+  }
+  .hero-stats {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .stat-card {
+    background: rgba(15,26,16,0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 18px;
+  }
+  .stat-num { font-size: 36px; font-weight: 900; color: #99b533; line-height: 1; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.55); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+  .stat-card.accent { background: rgba(47,101,53,0.6); border-color: rgba(153,181,51,0.3); }
+
+  /* ========== BADGES BAR ========== */
+  .badges-bar {
+    background: rgba(255,255,255,0.04);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 14px 48px;
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  }
+  .badge-label { font-size: 10px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; margin-right: 6px; }
+  .badge {
+    padding: 4px 12px; border-radius: 30px;
+    font-size: 11px; font-weight: 700;
+  }
+  .badge-green { background: rgba(47,101,53,0.35); color: #7fc47f; border: 1px solid rgba(47,101,53,0.5); }
+  .badge-lime { background: rgba(153,181,51,0.2); color: #c0d45f; border: 1px solid rgba(153,181,51,0.4); }
+
+  /* ========== SERVICES ========== */
+  .services {
+    padding: 80px 48px;
+    background: #0f1a10;
+  }
+  .section-label {
+    font-size: 11px; color: #99b533; text-transform: uppercase;
+    letter-spacing: 2px; font-weight: 700; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Roboto Slab', serif;
+    font-size: 36px; font-weight: 900; color: #fff;
+    margin-bottom: 48px; line-height: 1.15;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .service-card {
+    background: #111e12;
+    padding: 28px 24px;
+    transition: background .2s;
+    cursor: pointer;
+    border-right: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .service-card:hover { background: #162118; }
+  .service-icon { font-size: 28px; margin-bottom: 16px; }
+  .service-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .service-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 16px; }
+  .service-link { font-size: 12px; color: #99b533; font-weight: 700; }
+  .service-card.highlight { background: rgba(47,101,53,0.2); border: 1px solid rgba(153,181,51,0.2); }
+
+  /* ========== ABOUT SPLIT ========== */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    min-height: 420px;
+  }
+  .about-img {
+    background: url('https://images.unsplash.com/photo-1589923188900-85dae523342b?w=600&q=80') center/cover;
+    position: relative;
+  }
+  .about-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to right, transparent 60%, #0f1a10);
+  }
+  .about-content {
+    background: #0f1a10;
+    padding: 64px 48px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .about-content p {
+    font-size: 14px; color: rgba(255,255,255,0.6);
+    line-height: 1.8; margin-bottom: 16px;
+  }
+
+  /* ========== QUALYSYS ========== */
+  .qualysys {
+    background: linear-gradient(135deg, #1a3d1f, #2f6535);
+    padding: 64px 48px;
+    display: flex; gap: 64px; align-items: center;
+  }
+  .qualysys-text { flex: 1; }
+  .qualysys h2 { font-family: 'Roboto Slab', serif; font-size: 32px; color: #fff; margin-bottom: 16px; }
+  .qualysys p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 24px; }
+  .qualysys-mockup {
+    flex: 1;
+    background: rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    min-height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.3); font-size: 13px;
+  }
+
+  /* ========== ARTICLES ========== */
+  .articles { padding: 80px 48px; background: #111e12; }
+  .articles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .article-card {
+    background: #0f1a10;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; overflow: hidden;
+    transition: border-color .2s, transform .2s;
+    cursor: pointer;
+  }
+  .article-card:hover { border-color: rgba(153,181,51,0.4); transform: translateY(-2px); }
+  .article-img { height: 80px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.2); font-size: 11px; }
+  .article-body { padding: 16px; }
+  .article-tag { font-size: 9px; font-weight: 700; color: #99b533; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .article-title { font-size: 13px; font-weight: 700; color: #fff; line-height: 1.4; }
+
+  /* ========== CTA ========== */
+  .cta-section {
+    background: #fff;
+    padding: 80px 48px;
+    text-align: center;
+  }
+  .cta-section .section-label { color: #2f6535; }
+  .cta-section h2 {
+    font-family: 'Roboto Slab', serif;
+    font-size: 40px; color: #1a3d1f;
+    margin-bottom: 16px; font-weight: 900;
+  }
+  .cta-section p { font-size: 16px; color: #555; max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+  .cta-actions { display: flex; gap: 12px; justify-content: center; }
+  .btn-cta-primary {
+    background: #25d366; color: #fff;
+    padding: 16px 32px; border-radius: 8px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none; display: flex; align-items: center; gap: 8px;
+  }
+  .btn-cta-outline {
+    border: 2px solid #2f6535; color: #2f6535;
+    padding: 16px 32px; border-radius: 8px;
+    font-size: 15px; text-decoration: none;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: #080f08;
+    padding: 48px;
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 32px; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-brand { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 12px; }
+  .footer-brand span { color: #99b533; }
+  footer p, footer a {
+    font-size: 12px; color: rgba(255,255,255,0.4);
+    line-height: 2; text-decoration: none; display: block;
+  }
+  footer a:hover { color: rgba(255,255,255,0.7); }
+  .footer-col-title { font-size: 10px; font-weight: 700; color: #99b533; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-text">Qualyvet<span>.</span></div>
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Quem Somos</a>
+    <a href="#">Serviços</a>
+    <a href="#">Artigos</a>
+    <a href="#">Contato</a>
+    <a href="#" class="btn-platform">🔐 Plataforma</a>
+    <a href="#" class="btn-whats">💬 WhatsApp</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Especialistas em POA</div>
+    <h1>Conformidade<br>que vira<br><em>resultado.</em></h1>
+    <p class="hero-sub">Gestão da qualidade, registro junto ao MAPA e planejamento industrial para agroindústrias de Produtos de Origem Animal.</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">💬 Falar pelo WhatsApp</a>
+      <a href="#" class="btn-outline">Conheça os serviços</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Anos de mercado</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-num">N+</div>
+        <div class="stat-label">Clientes ativos</div>
+      </div>
+      <div class="stat-card accent">
+        <div class="stat-num">SIF</div>
+        <div class="stat-label">Federal · SIE · SIM</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">RS</div>
+        <div class="stat-label">Rio Grande do Sul</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BADGES BAR -->
+<div class="badges-bar">
+  <span class="badge-label">Atuamos com:</span>
+  <span class="badge badge-green">SIF</span>
+  <span class="badge badge-green">SIE</span>
+  <span class="badge badge-green">SIM</span>
+  <span class="badge badge-lime">SISBI-POA</span>
+  <span class="badge badge-lime">SUSAF</span>
+  <span class="badge badge-green">BPF</span>
+  <span class="badge badge-green">PPHO</span>
+  <span class="badge badge-green">HACCP / APPCC</span>
+</div>
+
+<!-- SERVIÇOS -->
+<section class="services">
+  <p class="section-label">O que fazemos</p>
+  <h2 class="section-title">Soluções completas para<br>sua agroindústria POA</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏭</div>
+      <div class="service-name">Gestão de Qualidade</div>
+      <div class="service-desc">Programas de autocontrole (BPF, PPHO, HACCP) conforme a legislação vigente do MAPA.</div>
+      <div class="service-link">Ver detalhes →</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📐</div>
+      <div class="service-name">Planejamento Industrial</div>
+      <div class="service-desc">Projetos de construção, reforma e ampliação para adequação às normas regulatórias.</div>
+      <div class="service-link">Ver detalhes →</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎓</div>
+      <div class="service-name">Treinamento e Capacitação</div>
+      <div class="service-desc">Desenvolvimento das equipes in loco para melhoria contínua de qualidade e produtividade.</div>
+      <div class="service-link">Ver detalhes →</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <div class="service-name">Assessoria e Consultoria</div>
+      <div class="service-desc">Otimização da produção, melhoria de eficiência e conformidade regulatória contínua.</div>
+      <div class="service-link">Ver detalhes →</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <div class="service-name">Acompanhamento de Processos</div>
+      <div class="service-desc">Monitoramento contínuo com transparência em cada etapa — você sempre sabe o que está acontecendo.</div>
+      <div class="service-link">Ver detalhes →</div>
+    </div>
+    <div class="service-card highlight">
+      <div class="service-icon">💻</div>
+      <div class="service-name">Sistema QualySys</div>
+      <div class="service-desc">Plataforma exclusiva de documentos na nuvem. Acesse seus POPs e registros de qualquer lugar.</div>
+      <div class="service-link">Acessar plataforma →</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUEM SOMOS -->
+<section class="about">
+  <div class="about-img"></div>
+  <div class="about-content">
+    <p class="section-label">Quem Somos</p>
+    <h2 class="section-title" style="font-size:28px; margin-bottom:24px;">Especialistas em POA<br>com sede no RS</h2>
+    <p>A Qualyvet atua no segmento agroindustrial de Produtos de Origem Animal há mais de 10 anos, auxiliando empresas na gestão da qualidade e planejamento industrial.</p>
+    <p>Realizamos o acompanhamento in loco dos processos produtivos, promovendo a capacitação dos colaboradores e registrando estabelecimentos junto ao SIM, SIE, SIF, SISBI-POA e SUSAF.</p>
+    <a href="#" class="btn-outline" style="margin-top: 8px; width: fit-content; color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.25); font-size: 13px; padding: 10px 20px;">Conheça nossa história →</a>
+  </div>
+</section>
+
+<!-- QUALYSYS -->
+<section class="qualysys">
+  <div class="qualysys-text">
+    <div class="hero-tag" style="margin-bottom: 20px;">Diferencial exclusivo</div>
+    <h2>QualySys — seus documentos<br>na nuvem, sempre acessíveis</h2>
+    <p>A Qualyvet oferece uma plataforma exclusiva onde todos os documentos do seu estabelecimento ficam centralizados, seguros e acessíveis a qualquer hora. Nenhum concorrente oferece isso.</p>
+    <div style="display:flex; gap:10px;">
+      <a href="#" class="btn-primary" style="background:#fff; color:#2f6535;">Acessar Plataforma</a>
+      <a href="#" class="btn-outline" style="border-color:rgba(255,255,255,0.3); color:rgba(255,255,255,0.8); font-size:13px; padding:10px 20px;">Saiba mais</a>
+    </div>
+  </div>
+  <div class="qualysys-mockup">screenshot da plataforma</div>
+</section>
+
+<!-- ARTIGOS -->
+<section class="articles">
+  <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:32px;">
+    <div>
+      <p class="section-label">Artigos</p>
+      <h2 class="section-title" style="margin-bottom:0; font-size:28px;">Entenda o universo POA</h2>
+    </div>
+    <a href="#" style="font-size:13px; color:#99b533; font-weight:700; text-decoration:none;">Ver todos →</a>
+  </div>
+  <div class="articles-grid">
+    <div class="article-card">
+      <div class="article-img">imagem</div>
+      <div class="article-body">
+        <div class="article-tag">Registro</div>
+        <div class="article-title">O que é o SIF e como conseguir o registro federal?</div>
+      </div>
+    </div>
+    <div class="article-card">
+      <div class="article-img">imagem</div>
+      <div class="article-body">
+        <div class="article-tag">Inspeção</div>
+        <div class="article-title">SISBI-POA vs SIF: qual sistema de inspeção escolher?</div>
+      </div>
+    </div>
+    <div class="article-card">
+      <div class="article-img">imagem</div>
+      <div class="article-body">
+        <div class="article-tag">Qualidade</div>
+        <div class="article-title">Programas de Autocontrole: guia completo para POA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <p class="section-label">Vamos começar?</p>
+  <h2>Pronto para regularizar<br>sua empresa?</h2>
+  <p>Atendemos frigoríficos, laticínios, abatedouros, beneficiadoras de pescado e muito mais. Fale agora com nossos especialistas.</p>
+  <div class="cta-actions">
+    <a href="#" class="btn-cta-primary">💬 Iniciar conversa no WhatsApp</a>
+    <a href="#" class="btn-cta-outline">Conhecer os serviços</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">Qualyvet<span>.</span></div>
+    <p>R. Ver. Ivo Cláudio Weigel, 228<br>Renascença — Santa Cruz do Sul / RS</p>
+    <p>(51) 3121-3066</p>
+    <p>contato@qualyvetconsultoria.com.br</p>
+    <p class="footer-copy">CNPJ 24.184.899/0001-08<br>© 2025 Qualyvet Consultoria</p>
+  </div>
+  <div>
+    <div class="footer-col-title">Serviços</div>
+    <a href="#">Gestão de Qualidade</a>
+    <a href="#">Planejamento Industrial</a>
+    <a href="#">Treinamento</a>
+    <a href="#">Assessoria e Consultoria</a>
+    <a href="#">Acompanhamento</a>
+    <a href="#">Sistema QualySys</a>
+  </div>
+  <div>
+    <div class="footer-col-title">Artigos</div>
+    <a href="#">O que é o SIF?</a>
+    <a href="#">SISBI-POA vs SIF</a>
+    <a href="#">Programas de Autocontrole</a>
+    <a href="#">Como obter registro MAPA</a>
+    <a href="#">O que é HACCP?</a>
+  </div>
+  <div>
+    <div class="footer-col-title">Links</div>
+    <a href="#">Início</a>
+    <a href="#">Quem Somos</a>
+    <a href="#">Trabalhe Conosco</a>
+    <a href="#">Plataforma QualySys</a>
+    <a href="#">Contato</a>
+  </div>
+</footer>
+
+</body>
+</html>
