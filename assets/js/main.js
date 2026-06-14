@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
       nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', nav.classList.contains('open'));
     });
+    
+    // Close on link click
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => nav.classList.remove('open'));
+    });
   }
 
   // ========== EXIT INTENT POPUP ==========
@@ -77,11 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
       hideExitPopup();
     }
   });
-    // Close on link click
-    nav.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => nav.classList.remove('open'));
-    });
-  }
 
   // --- Active nav link ---
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';

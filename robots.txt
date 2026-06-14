@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://andersonmrodrigues.github.io/qualyvet-novo/sitemap.xml
+Sitemap: https://qualyvetconsultoria.com.br/sitemap.xml
 
 # Diretórios permitidos
 Allow: /servicos/
