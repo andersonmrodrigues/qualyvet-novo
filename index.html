@@ -14,8 +14,13 @@
   <link rel="icon" href="assets/images/favicon.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@700;900&display=swap"></noscript>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"></noscript>
+  <link rel="preload" as="image" href="assets/images/hero-food-industry.jpg">
   <link rel="stylesheet" href="assets/css/style.css">
   <script type="application/ld+json">
   {
@@ -39,7 +44,7 @@
 <header class="site-header">
   <div class="header-inner">
     <a href="index.html" class="site-logo">
-      <img src="assets/images/qualyvet.png" alt="Qualyvet Consultoria">
+      <img src="assets/images/qualyvet.png" alt="Qualyvet Consultoria" width="180" height="60">
     </a>
     <nav class="main-nav" aria-label="Menu principal">
       <a href="index.html">Início</a>
@@ -60,6 +65,7 @@
 </header>
 
 <!-- HERO -->
+<main>
 <section class="hero">
   <div class="hero-left">
     <span class="badge-tag">Especialistas em Frigoríficos</span>
@@ -370,7 +376,7 @@
         </div>
       </div>
       <div class="qualysys-mockup">
-        <img src="assets/images/team-inspection.jpg" alt="Plataforma Qualyvet">
+        <img src="assets/images/team-inspection.jpg" alt="Plataforma Qualyvet" width="600" height="400" loading="lazy">
       </div>
     </div>
   </div>
@@ -464,21 +470,21 @@
     </div>
     <div class="articles-grid">
       <a href="artigos/o-que-e-sif.html" class="article-card">
-        <div class="article-img"><img src="assets/images/quality-control.jpg" alt="O que é o SIF"></div>
+        <div class="article-img"><img src="assets/images/quality-control.jpg" alt="O que é o SIF" width="400" height="250" loading="lazy"></div>
         <div class="article-body">
           <div class="article-cat">Registro</div>
           <h3>O que é o SIF e como conseguir o registro federal?</h3>
         </div>
       </a>
       <a href="artigos/sisbi-poa-vs-sif.html" class="article-card">
-        <div class="article-img"><img src="assets/images/food-safety-general.jpg" alt="SISBI-POA vs SIF"></div>
+        <div class="article-img"><img src="assets/images/food-safety-general.jpg" alt="SISBI-POA vs SIF" width="400" height="250" loading="lazy"></div>
         <div class="article-body">
           <div class="article-cat">Inspeção</div>
           <h3>SISBI-POA vs SIF: qual sistema de inspeção escolher?</h3>
         </div>
       </a>
       <a href="artigos/programas-de-autocontrole.html" class="article-card">
-        <div class="article-img"><img src="assets/images/industrial-blueprint.jpg" alt="Programas de Autocontrole"></div>
+        <div class="article-img"><img src="assets/images/industrial-blueprint.jpg" alt="Programas de Autocontrole" width="400" height="250" loading="lazy"></div>
         <div class="article-body">
           <div class="article-cat">Qualidade</div>
           <h3>Programas de Autocontrole: guia completo para POA</h3>
@@ -648,7 +654,8 @@
     <div class="footer-bottom">© 2025 Qualyvet Consultoria e Assessoria LTDA. Todos os direitos reservados.</div>
   </div>
 </footer>
+</main>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
