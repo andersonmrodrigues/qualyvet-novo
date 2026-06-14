@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Páginas principais -->
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/sobre.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/contato.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/cases.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/trabalhe-conosco.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <!-- Serviços -->
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/servicos/gestao-de-qualidade.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/servicos/assessoria-e-consultoria.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/servicos/acompanhamento-de-processos.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/servicos/planejamento-industrial.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/servicos/treinamento-e-capacitacao.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/servicos/sistemas-informatizados.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Artigos -->
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/artigos/index.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/artigos/o-que-e-sif.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/artigos/sisbi-poa-vs-sif.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/artigos/programas-de-autocontrole.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/artigos/como-obter-registro-mapa.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/artigos/haccp-o-que-e.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Recursos -->
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/recursos/calculadora-roi.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/recursos/quiz-prontidao-mapa.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://andersonmrodrigues.github.io/qualyvet-novo/recursos/checklist-bpf.html</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

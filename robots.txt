@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://andersonmrodrigues.github.io/qualyvet-novo/sitemap.xml
+
+# Diretórios permitidos
+Allow: /servicos/
+Allow: /artigos/
+Allow: /recursos/
+
+# Diretórios bloqueados
+Disallow: /.superpowers/
+Disallow: /assets/js/
+Disallow: /assets/css/
+
+# Crawl-delay
+Crawl-delay: 1
