@@ -18,6 +18,65 @@ document.addEventListener('DOMContentLoaded', () => {
       nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', nav.classList.contains('open'));
     });
+  }
+
+  // ========== EXIT INTENT POPUP ==========
+  const exitPopup = document.getElementById('exitPopup');
+  const exitPopupClose = document.querySelector('.exit-popup-close');
+  let exitIntentShown = sessionStorage.getItem('exitIntentShown');
+  let mouseLeaveDelay = null;
+
+  // Detecta movimento do mouse saindo da viewport
+  if (exitPopup && !exitIntentShown) {
+    document.addEventListener('mouseleave', (e) => {
+      // Só dispara se o mouse sair pelo topo (tentando fechar aba/janela)
+      if (e.clientY < 10 && !exitIntentShown && window.scrollY > 300) {
+        mouseLeaveDelay = setTimeout(() => {
+          showExitPopup();
+        }, 200); // Delay para evitar triggers acidentais
+      }
+    });
+
+    // Cancela se o mouse voltar rapidamente
+    document.addEventListener('mouseenter', () => {
+      if (mouseLeaveDelay) {
+        clearTimeout(mouseLeaveDelay);
+      }
+    });
+  }
+
+  function showExitPopup() {
+    exitPopup.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    exitIntentShown = true;
+    sessionStorage.setItem('exitIntentShown', 'true');
+  }
+
+  function hideExitPopup() {
+    exitPopup.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Fechar ao clicar no X
+  if (exitPopupClose) {
+    exitPopupClose.addEventListener('click', hideExitPopup);
+  }
+
+  // Fechar ao clicar fora do popup
+  if (exitPopup) {
+    exitPopup.addEventListener('click', (e) => {
+      if (e.target === exitPopup) {
+        hideExitPopup();
+      }
+    });
+  }
+
+  // Fechar com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && exitPopup && exitPopup.classList.contains('active')) {
+      hideExitPopup();
+    }
+  });
     // Close on link click
     nav.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => nav.classList.remove('open'));

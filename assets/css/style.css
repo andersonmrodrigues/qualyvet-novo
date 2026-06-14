@@ -2560,8 +2560,132 @@ a:focus-visible {
   .cta-section,
   .footer-social,
   .btn-whatsapp,
-  .btn-whatsapp-small {
+  .btn-whatsapp-small,
+  .exit-popup-overlay {
     display: none !important;
+  }
+}
+
+/* ============================
+   EXIT INTENT POPUP
+   ============================ */
+
+.exit-popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.exit-popup-overlay.active {
+  display: flex;
+}
+
+.exit-popup {
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  max-width: 520px;
+  width: 90%;
+  padding: 40px 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.4s ease;
+  text-align: center;
+}
+
+.exit-popup-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  font-size: 32px;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  transition: color 0.2s;
+}
+
+.exit-popup-close:hover {
+  color: #333;
+}
+
+.exit-popup-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  animation: bounce 0.6s ease;
+}
+
+.exit-popup h3 {
+  font-size: 26px;
+  font-weight: 900;
+  color: #1a3d1f;
+  margin-bottom: 12px;
+  font-family: 'Roboto Slab', serif;
+}
+
+.exit-popup p {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.exit-popup .btn {
+  margin-top: 8px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  max-width: 360px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+  .exit-popup {
+    padding: 32px 24px;
+  }
+  
+  .exit-popup h3 {
+    font-size: 22px;
+  }
+  
+  .exit-popup p {
+    font-size: 14px;
   }
   
   .hero {
